@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.config.js';
 
-export const User = await sequelize.define(
+const User = await sequelize.define(
     'users', {
     firstName: {
         type: DataTypes.STRING,
@@ -23,19 +23,22 @@ export const User = await sequelize.define(
         },
 
     },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: {
+                args: [8, Infinity],
+                msg: "La contraseña debe tener al menos 8 caracteres"
+            }
+        }
+    }
 },
     {
         timestamps: true
     });
-/* export const asociateUser = (bootcampId, userId) => {
-    const sql = `
-          INSERT INTO "User_Bootcamp" 
-          VALUES (NOW(), NOW(), '${bootcampId}', '${userId}');
-        `
-    return sequelize.query(sql, {
-        type: sequelize.QueryTypes.INSERT
-    })
 
-}; */
+    export default User;
+
 
 

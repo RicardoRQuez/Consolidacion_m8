@@ -1,4 +1,4 @@
-import { User } from '../models/User.model.js';
+import User  from '../models/User.model.js';
 import Bootcamp from '../models/Bootcamp.model.js';
 
 
@@ -10,7 +10,7 @@ export const createBootcamp = async (req, res) => {
             title, cue, description
         });
 
-        console.log(`Se ha insertado ${JSON.stringify(nuevoBootcamp)}`)
+     //   console.log(`Se ha insertado ${JSON.stringify(nuevoBootcamp)}`)
 
         res.status(201).send({
             code: 201,
@@ -119,6 +119,17 @@ export const findAll = async (req, res) => {
             include: User, // Se incluyen los usuarios asociados al bootcamp
         });
         res.json(allBootcampAndUser);
+    } catch (error) {
+        console.error('Error al obtener los bootcamp:', error);
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+};
+// Obtener todos los Bootcamp 
+export const findAllBootcamp = async (req, res) => {
+    try {
+        //obtener todos los bootcamp con sus usuarios
+        const allBootcamp = await Bootcamp.findAll();
+        res.json(allBootcamp);
     } catch (error) {
         console.error('Error al obtener los bootcamp:', error);
         res.status(500).json({ error: 'Error del servidor' });

@@ -1,0 +1,60 @@
+<form class="form" id="createUserForm">
+    <h1>Informacion del Bootcamp</h1>
+  <div class="mb-3">
+    <label for="bootcampTitle" class="form-label">Titulo del bootcamp: </label>
+    <input type="text" class="form-control" id="bootcampTitle" name="bootcampTitle" value="{{bootcamp.title}}" readonly>
+  </div>
+  <div class="mb-3">
+    <label for="bootcampId" class="form-label">Id del Bootcamp </label>
+    <input type="text" class="form-control" id="bootcampId" name="bootcampId"  value="{{bootcamp.id}}" readonly>
+  </div>
+    <h1>Informacion del Usuario que agregara al Bootcamp</h1>
+  <div class="mb-3">
+    <label for="firstName" class="form-label">First Name: </label>
+    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Nombre del usuario" required>
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label"> Last Name: </label>
+    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="apellido del usuario"  required>
+  </div>
+  <div class="mb-3">
+    <label for="idUser" class="form-label">Id  </label>
+    <input type="text" class="form-control" id="idUser" name="idUser" placeholder="Id del usuario" required>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</form>
+            
+<script>
+  const createUserForm = document.getElementById('createUserForm')
+  createUserForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    const raw = JSON.stringify({
+      bootcampId: bootcampId.value,
+      userId: idUser.value,
+    });
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    let token = localStorage.getItem("token");
+
+    fetch("/api/bootcamp/adduser", requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data.code == 200) {
+          alert(data.message);
+          location.href = "/api/administracion/bootcamps?token=" + token
+        } else {
+          alert(data.message);
+        }
+      }).catch(error => console.log("error", error));
+  });
+</script>

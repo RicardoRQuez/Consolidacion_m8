@@ -1,0 +1,53 @@
+<form class="form" id="editForm">
+  <div class="mb-3">
+    <label for="firstName" class="form-label">Nombre actual: {{editarUsuario.firstName}}</label>
+    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Ingrese nuevo nombre" required>
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Apellido actual: {{editarUsuario.lastName}}</label>
+    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Ingrese nuevo apellido" required>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</form>
+<style>
+    .btn {
+        background-color: #0e1c36;
+        color: #fff;
+    }
+   
+</style>
+<script>
+  const formEdit = document.getElementById('editForm')
+  formEdit.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const myHeaders = new Headers();
+
+    myHeaders.append("Content-Type", "application/json");
+    const raw = JSON.stringify({
+      firstName: firstName.value,
+      lastName: lastName.value,
+    });
+    const requestOptions = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    const userId = "{{ editarUsuario.id }}"
+    let token = localStorage.getItem("token");
+
+    console.log("idFetch", userId);
+    fetch(`/api/user/${userId}`, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data.code == 200) {
+          alert(data.message);
+          location.href = "/api/administracion/users?token=" + token
+        } else {
+          alert(data.message);
+        }
+      }).catch(error => console.log("error", error));
+  });
+</script>

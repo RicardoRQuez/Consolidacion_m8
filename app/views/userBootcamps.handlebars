@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Usuarios y sus Bootcamps</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Bootcamps</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each bootcamp}}
+            <tr>
+                <td>{{this.firstName}} {{this.lastName}}</td>
+                <td>
+                    <ul>
+                        {{#each this.bootcamps}}
+                        <li>{{this.title}}</li>
+                        {{/each}}
+                    </ul>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

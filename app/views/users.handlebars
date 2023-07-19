@@ -1,0 +1,85 @@
+<h1>Tabla de Usuarios y Bootcamps</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Bootcamps</th>
+            <th>Editar Usuario</th>
+            <th>Eliminar Usuario</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {{#each usuarios}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{firstName}}</td>
+            <td> {{lastName}}</td>
+            <td>{{email}}</td>
+            <td>
+                {{#each bootcamps}}
+                <span>- {{this.title}} -</span>
+
+                {{/each}}
+
+            </td>
+
+            <td><button id="buttonEditar" class="btn btn-outline-success btn-block" editar-Id="{{id}}">Editar</button>
+            </td>
+
+            <td><button id="buttonEliminar" class="btn btn-outline-success btn-block"
+                    eliminar-id="{{id}}">Eliminar</button> </td>
+        </tr>
+
+        {{/each}}
+    </tbody>
+</table>
+<style>
+    .btn {
+        background-color: #0e1c36;
+        color: #fff;
+    }
+</style>
+<script>
+    const buttonEditar = document.querySelectorAll("#buttonEditar");
+
+    buttonEditar.forEach((buttonEditar) => {
+
+        buttonEditar.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const userId = event.target.getAttribute('editar-Id')
+            let token = localStorage.getItem("token");
+            location.href = `/api/administracion/users/editar/${userId}?token=` + token
+        });
+    });
+    const buttonsEliminar = document.querySelectorAll('#buttonEliminar');
+    buttonsEliminar.forEach((buttonsEliminar) => {
+        buttonsEliminar.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const userId = event.target.getAttribute('eliminar-id')
+            let token = localStorage.getItem("token");
+
+            // Realizar la solicitud para eliminar el usuario
+            fetch(`/api/user/${userId}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+                    if (data) {
+                        alert(data.message);
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                }).catch(error => console.log("error", error));
+
+        });
+    })
+</script>

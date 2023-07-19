@@ -1,14 +1,17 @@
-import { User } from '../models/User.model.js';
+import  User from '../models/User.model.js';
 import Bootcamp from '../models/Bootcamp.model.js';
 
 // Crear y guardar usuarios llamado createUser.
 export const createUser = async (req, res) => {
     try {
 
-        let { firstName, lastName, email } = req.body;
-
+        let { firstName, lastName, email, password} = req.body;
+        if(!(firstName && lastName && email && password)) {
+            res.status(400).send("Todos los compos son requeridos");
+        }
+       
         const nuevoUsuario = await User.create({
-            firstName, lastName, email
+            firstName, lastName, email, password
         });
 
         console.log(`Se ha insertado ${JSON.stringify(nuevoUsuario)}`)
@@ -22,7 +25,6 @@ export const createUser = async (req, res) => {
         res.status(500).send({ code: 500, message: error.message })
     }
 };
-
 export const bulkCreateUser = async (req, res) => {
     try {
         const nuevosUsuarios = await User.bulkCreate(req.body);
@@ -71,7 +73,7 @@ export const findAll = async (req, res) => {
 // Actualizar usuario por Id llamado updateUserById.
 export const updateUserById = async (req, res) => {
     const { id } = req.params;
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName } = req.body;
     try {
         // Verificamos si el usuario existe
         const updateUser = await User.findByPk(id);
@@ -84,10 +86,8 @@ export const updateUserById = async (req, res) => {
         // Actualizar datos del usuario
         updateUser.firstName = firstName;
         updateUser.lastName = lastName;
-        updateUser.email = email;
         await updateUser.save();
-
-        res.json(updateUser);
+        res.json({ code: 200, message: " Usuario actualizado con exito.", token: req.token });
     } catch (error) {
         console.log("Error en la actualizacion de un Usuario", error);
         res.status(500).json({ error: 'Error del servidor' });
@@ -111,10 +111,13 @@ export const deleteUserById = async (req, res) => {
         // Eliminar el usuario
         await deleteUser.destroy();
 
-        res.json({ message: 'Usuario eliminado correctamente' });
+        res.json({ message: 'Usuario eliminado correctamente', token: req.token  });
     } catch (error) {
         console.error('Error al eliminar el usuario:', error);
         res.status(500).json({ error: 'Error del servidor' });
     }
 };
 
+export const login = async (req, res) => {
+    res.json({ code: 200, message: "Login correcto.", token: req.token });
+};

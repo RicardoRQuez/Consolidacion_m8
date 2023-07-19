@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Principal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkAdministracion" href="/api/administracion">Administrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkBootcamps" href="/api/bootcamps">Bootcamps</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkSignin" href="/api/signin">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkLogout" href="">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkProtegida" href=""></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="linkDashboard" href=""></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    let token = localStorage.getItem("token");
+    let linkLogout = document.getElementById("linkLogout");
+    let linkSignin = document.getElementById("linkSignin");
+    let linkBootcamps = document.getElementById("linkBootcamps");
+    let linkAdministracion = document.getElementById("linkAdministracion");
+   
+    if (token) {
+        linkSignin.style.display = "none";
+        linkBootcamps.style.display = "none";
+    } else {
+        linkLogout.style.display = "none";
+        linkAdministracion.style.display = "none";
+    }
+
+    linkLogout.addEventListener("click", (event) => {
+        event.preventDefault();
+        localStorage.removeItem("token");
+        alert("Se ha cerrado sesión.");
+        location.reload();
+    });
+    
+    linkAdministracion.addEventListener("click", (event) => {
+        event.preventDefault();
+        let token = localStorage.getItem("token");
+        location.href = "/api/administracion?token=" + token
+    });
+</script>

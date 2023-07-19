@@ -1,0 +1,57 @@
+<h1>Tabla de Bootcamps y Usuarios</h1>
+<button id="buttonCrear" class="btn btn-color btn-outline-success btn-block col-12">Crear Bootcamp </button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Cue</th>
+            <th>Description</th>
+            <th>Agregar Usuario</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        {{#each bootcamps}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td> {{cue}}</td>
+            <td>{{description}}</td>
+            <td><button id="buttonAgregar" class="btn btn-color btn-outline-success btn-block" agregar-id={{id}}>Agregar
+                    Usuario al Bootcamp
+                </button> </td>
+
+
+
+            {{/each}}
+    </tbody>
+</table>
+<style>
+    .btn-color {
+        background-color: #0e1c36;
+        color: #fff;
+    }
+</style>
+<script>
+    const buttonCrear = document.getElementById("buttonCrear");
+
+    buttonCrear.addEventListener("click", (event) => {
+        event.preventDefault();
+        let token = localStorage.getItem("token");
+        location.href = "/api/administracion/bootcamps/new-bootcamp?token=" + token
+    });
+
+    const buttonAgregar = document.querySelectorAll("#buttonAgregar");
+    buttonAgregar.forEach((buttonAgregar) => {
+        buttonAgregar.addEventListener("click", (event) => {
+            event.preventDefault();
+            const bootcampId = event.target.getAttribute('agregar-id')
+            console.log("idbootcampClick", bootcampId);
+            let token = localStorage.getItem("token");
+            location.href = `/api/administracion/bootcamps/${bootcampId}?token=` + token
+        });
+    });
+
+</script>

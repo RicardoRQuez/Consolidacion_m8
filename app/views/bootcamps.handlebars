@@ -1,0 +1,27 @@
+<h1 class="text-center py-3">Cursos de Programación</h1>
+
+<div class="container">
+  <div class="row">
+    {{#each bootcamp}}
+    <div class="col-md-4 mb-4">
+      <div class="card mb-3 h-100  ">
+        <div class="card-body">
+          <h5 class="card-title">{{this.title}}</h5>
+          <p class="card-text">CUE: {{this.cue}}</p>
+          <p class="card-text">Descripción: <br>{{this.description}}</p>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+<style>
+    .custom-card {
+  background-color: #ebf2fa;
+  color:  #0e1c36;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+

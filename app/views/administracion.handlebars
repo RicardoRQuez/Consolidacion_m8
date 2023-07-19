@@ -1,0 +1,45 @@
+<h1>Panel de Administración</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4 lg-12 col-lg-12">
+            <div class="card mb-3 h-100  ">
+                <div class="card-body">
+                    <h5 class="card-title">Listar Informacion de los usuarios</h5>
+                    <p class="card-text">Aqui podras acceder a la informacion de todos los usuarios, editar sus Nombres y apellidos, ademas de eliminar un usuario.</p>
+                    <button onclick="window.location.href='/api/administracion/users'" id="buttonIngresar"
+                        class="btn btn-color btn-outline-success btn-block">Ingresar</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 col-lg-12">
+            <div class="card mb-3 h-100  ">
+                <div class="card-body">
+                    <h5 class="card-title">Listar Informacion de los bootcamps</h5>
+                    <p class="card-text">Aqui podras acceder a la informacion de todos los bootcamps. Crear un bootcamp y añadir usuarios a los bootcamps</p>
+                    <button onclick="window.location.href='/api/administracion/bootcamps'" id="buttonIngresarBootcamp"
+                        class="btn btn-color btn-outline-success btn-block">Ingresar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .btn-color {
+        background-color: #0e1c36;
+        color: #fff;
+    }
+</style>
+<script>
+    buttonIngresar.addEventListener("click", (event) => {
+        event.preventDefault();
+        let token = localStorage.getItem("token");
+        location.href = "/api/administracion/users?token=" + token
+    });
+    buttonIngresarBootcamp.addEventListener("click", (event) => {
+        event.preventDefault();
+        let token = localStorage.getItem("token");
+        location.href = "/api/administracion/bootcamps?token=" + token
+    });
+</script>
