@@ -22,10 +22,16 @@
     <input type="text" class="form-control" id="idUser" name="idUser" placeholder="Id del usuario" required>
   </div>
   <div>
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-outline-success">Guardar</button>
   </div>
 </form>
-            
+ <style>
+    .btn {
+        background-color: #0e1c36;
+        color: #fff;
+    }
+    
+</style>           
 <script>
   const createUserForm = document.getElementById('createUserForm')
   createUserForm.addEventListener('submit', (event) => {

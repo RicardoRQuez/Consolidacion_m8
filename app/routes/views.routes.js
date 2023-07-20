@@ -3,7 +3,7 @@ import { verifyToken, validarAdmin } from "../middleware/index.js";
 import { emitToken } from "../middleware/index.js";
 import Bootcamp from "../models/Bootcamp.model.js";
 import User from "../models/User.model.js";
-
+ 
 const router = Router();
 
 
@@ -90,7 +90,6 @@ router.get("/api/administracion/users/editar/:userId", verifyToken, async (req, 
 router.get("/api/administracion/bootcamps", verifyToken, async (req, res) => {
     try {
         const bootcamps = await Bootcamp.findAll({
-            include: User,
             raw: true,
         });
         res.render("bootcampsAdmin", { bootcamps });

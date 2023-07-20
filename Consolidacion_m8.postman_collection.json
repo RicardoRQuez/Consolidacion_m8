@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "9a0a13d7-df15-41ba-9df9-8a5aa4899fcc",
+		"name": "Consolidacion_m8",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27052900"
+	},
+	"item": [
+		{
+			"name": "Signup_m8",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Mateo\",\r\n    \"lastName\": \"Díaz\",\r\n    \"email\": \"mateo.diaz@correo.com\",\r\n    \"password\": \"mateo123456\"\r\n},\r\n{\r\n    \"firstName\": \"Santiago\",\r\n    \"lastName\": \"Mejías\",\r\n    \"email\": \"santiago.mejías@correo.com\",\r\n    \"password\": \"santiago123456\"\r\n},\r\n{\r\n    \"firstName\": \"Lucas\",\r\n    \"lastName\": \"Rojas\",\r\n    \"email\": \"lucas.rojas@correo.com\",\r\n    \"password\": \"lucas123456\"\r\n},\r\n{\r\n    \"firstName\": \"Facundo\",\r\n    \"lastName\": \"Fernandez\",\r\n    \"email\": \"facundo.fernandez@correo.com\",\r\n    \"password\": \"facundo123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/api/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn_m8",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"mateo.diaz@correo.com\",\r\n    \"password\": \"mateo123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/api/signin/"
+			},
+			"response": []
+		},
+		{
+			"name": "createBootcamp_m8",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Introduciendo El Bootcamp De React.\",\r\n    \"cue\": \"10\",\r\n    \"description\": \"React es la librería más usada en JavaScript para el desarrollo de interfaces.\"\r\n},\r\n{\r\n    \"title\": \"Bootcamp Desarrollo Web Full Stack.\",\r\n    \"cue\": \"12\",\r\n    \"description\": \"Crearás aplicaciones web utilizando las tecnologías y lenguajes más actuales y populares, como: JavaScript, nodeJS, Angular, MongoDB, ExpressJS\"\r\n},\r\n{\r\n    \"title\": \"Bootcamp Big Data, Inteligencia Artificial & Machine Learning.\",\r\n    \"cue\": \"18\",\r\n    \"description\": \"Domina Data Science, y todo el ecosistema de lenguajes y herramientas de Big Data, e intégralos con modelos avanzados de Artificial Intelligence y Machine Learning.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/api/bootcamp"
+			},
+			"response": []
+		},
+		{
+			"name": "ADD USER TO BOOTCAMP",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bootcampId\": 1,\r\n    \"userId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/v1/bootcamp/asociar"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_BOOTCAMP_m8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/api/allBootcamp"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_BOOTCAMP_WITH_USERS_m8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/api/allBootcamp"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_BOOTCAMP_ID_m8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/api/bootcamp/3"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_USERS_WITH_BOOTCAMP_m8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/api/user"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT_USER_ID_m8",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Sánchez\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3001/api/user/1"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_USER_ID_m8",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/api/v1/users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_ONE_USER_BOOTCAMP_m8",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3001/api/user/1"
+			},
+			"response": []
+		}
+	]
+}
